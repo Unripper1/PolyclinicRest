@@ -67,7 +67,6 @@ public class DoctorService {
             }
             if(meets.get(i).getFreeTimes().size()==0){
                 freeMeetRepo.delete(meets.get(i));
-                System.out.println("ok");
             }
         }
     }

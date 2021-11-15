@@ -14,13 +14,13 @@ import java.time.LocalTime;
 public class SchedulerService {
     private  final DoctorService doctorService;
     private final AppointmentService appointmentService;
-    @Scheduled(fixedRate = 3600000)
+    @Scheduled(fixedRate = 360000)
     public void updateSchedule() {
         LocalDate date = LocalDate.now().plusDays(4);
         LocalTime time=LocalTime.now();
         doctorService.updateSchedule(time,date);
     }
-    @Scheduled(fixedRate = 3600000)
+    @Scheduled(fixedRate = 360000)
     public void updateApp() {
         LocalDate date = LocalDate.now().plusDays(3);
         appointmentService.updateApp(date);
