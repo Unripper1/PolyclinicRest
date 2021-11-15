@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись ко врачу</title>
+</head>
+<body>
+<table border="1" bordercolor=black>
+    <thead>
+    <th>Специализация</th>
+    <th>Доктор</th>
+    <th>Свободные записи</th>
+    </thead>
+    <div th:each="doctor : ${doctors}">
+
+        <tr>
+            <td th:text="${doctor.getSpec()}"></td>
+            <td> <span th:text="${doctor.getFirstName()}"></span>&nbsp<span th:text="${doctor.getLastName()}"></span></td>
+<!--            <td>-->
+<!--                <p>Выберите дату:-->
+<!--                    <input type="date" name="calendar" value="2021-11-01"-->
+<!--                           max="2022-01-01" min="2021-11-01">-->
+<!--            </td>-->
+<!--            <td><select>-->
+<!--                <option value="10:00" th:if="appservice.check(doctor,Local">10:00</option>-->
+<!--                <option value="11:00">11:00</option>-->
+<!--                <option value="12:00">12:00</option>-->
+<!--                <option value="13:00">13:00</option>-->
+<!--                <option value="14:00">14:00</option>-->
+<!--                <option value="15:00">15:00</option>-->
+<!--                <option value="16:00">16:00</option>-->
+<!--            </select></td>-->
+                        <td>
+                            <div th:each="Date : ${doctor.getFreeMeets()}">
+                            <table border="1" bordercolor=black>
+                            <tr>
+                            <td th:text="${Date.getDate()}"></td>
+                                <div th:each="Time : ${Date.getFreeTimes()}">
+
+                             <td> <a th:href="${'/customer/setAppointment?id='+{doctor.getId()}+'&date='+{Date.getId()}+'&time='+{Time.getId()}}"><span th:text="${Time.getTime()}"></span></a></td>
+                                </div>
+                            </tr>
+                            </table>
+                            </div>
+
+                        </td>
+
+        </tr>
+    </div>
+</table>
+
+</body>
+</html>
