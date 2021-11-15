@@ -35,7 +35,8 @@ public class DoctorController {
     }
     @GetMapping("/app/{id}")
     public String app(@PathVariable("id") long id,Model model){
-        model.addAttribute("appointment", appointmentService.find(id));
+        model.addAttribute("appointments",appointmentService.find(id).getCustomer().getAppointments());
+//        model.addAttribute("appointment", appointmentService.find(id));
         return "app";
     }
     @PostMapping("/app/{id}")

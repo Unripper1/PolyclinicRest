@@ -24,5 +24,30 @@
             <input type="submit" value="Готово">
         </form>
 </div>
+<h1>История</h1>
+<table border="1" bordercolor=black>
+    <thead>
+    <th>id</th>
+    <th>Дата</th>
+    <th>Время</th>
+    <th>Врач</th>
+    <th>Специализация</th>
+    <th>Диагноз</th>
+    <th>Терапия</th>
+    <th>Пояснение</th>
+    </thead>
+<div th:each="appointment : ${appointments}">
+    <tr th:if="${appointment.getStatus()}==${T(course.polyclinic.enums.Status).SUCCESSFUL}">
+        <td th:text="${appointment.result.getId()}"></td>
+        <td th:text="${appointment.getDate()}"></td>
+        <td th:text="${appointment.getTime()}"></td>
+        <td><span th:text="${appointment.getDoctor().getFirstName()}"></span>&nbsp<span th:text="${appointment.getDoctor().getLastName()}"></span></td>
+        <td th:text="${appointment.getDoctor().getSpec()}"></td>
+        <td th:text="${appointment.result.diagnosis}"></td>
+        <td th:text="${appointment.result.therapy}"></td>
+        <td th:text="${appointment.result.description}"></td>
+    </tr>
+</div>
+</table>
 </body>
 </html>
