@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body>
 
+<body>
+<div>
+    <h1>Результат</h1>
+        <form  method="post" action="">
+            <p>Диагноз</p>
+            <textarea name="diagnosis"></textarea>
+            <br>
+            <p>Терапия</p>
+            <textarea name="therapy"></textarea>
+            <br>
+            <p>Пояснение</p>
+            <textarea name="description"></textarea>
+            <br>
+            <input type="submit" value="Готово">
+        </form>
+</div>
 </body>
 </html>

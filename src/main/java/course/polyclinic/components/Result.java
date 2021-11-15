@@ -1,6 +1,7 @@
 package course.polyclinic.components;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "results")
+@Accessors(chain = true)
 public class Result {
     @Id
     @Column(name="id")
