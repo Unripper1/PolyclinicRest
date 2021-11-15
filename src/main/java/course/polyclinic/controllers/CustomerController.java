@@ -39,6 +39,11 @@ public class CustomerController {
         model.addAttribute("doctors",doctorService.getAll());
         return "order";
     }
+    @GetMapping("/results")
+    public String results(Model model){
+        model.addAttribute("appointments",userService.loadUserByUsername(userService.getCurrentUsername()).getCustomer().getAppointments());
+        return "results";
+    }
 //    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping("/setAppointment")
     public String setAppointment(@RequestParam("id") Long id,@RequestParam("date") Long dateId,@RequestParam("time") Long timeId){

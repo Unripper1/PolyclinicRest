@@ -30,7 +30,7 @@
     <th>Кабинет</th>
     <th>Клиент</th>
     </thead>
-    <div th:each="appointment : ${appointments}">
+    <div th:if="${appointment.getStatus()}==${T(course.polyclinic.enums.Status).WAITING}" th:each="appointment : ${appointments}">
         <tr>
             <td th:text="${appointment.getId()}"></td>
             <td th:text="${appointment.getDate()}"></td>

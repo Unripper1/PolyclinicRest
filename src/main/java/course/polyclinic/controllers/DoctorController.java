@@ -2,6 +2,7 @@ package course.polyclinic.controllers;
 
 import course.polyclinic.DTO.ResultDTO;
 import course.polyclinic.components.Result;
+import course.polyclinic.enums.Status;
 import course.polyclinic.repo.ResultRepo;
 import course.polyclinic.services.AppointmentService;
 import course.polyclinic.services.CustomerService;
@@ -42,6 +43,7 @@ public class DoctorController {
         Result result=new Result().setDiagnosis(resultDTO.getDiagnosis()).setTherapy(resultDTO.getTherapy()).setDescription(resultDTO.getDescription());
         appointmentService.find(id).setResult(result);
         resultRepo.save(result);
+        appointmentService.find(id).setStatus(Status.SUCCESSFUL);
         appointmentService.save(appointmentService.find(id));
         return "app";
     }

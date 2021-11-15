@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Результаты посещений</h1>
+<form action="/customer/order">
+    <button>Личный кабинет</button>
+</form>
+<br>
+<table border="1" bordercolor=black>
+    <thead>
+    <th>id</th>
+    <th>Дата</th>
+    <th>Время</th>
+    <th>Врач</th>
+    <th>Специализация</th>
+    <th>Диагноз</th>
+    <th>Терапия</th>
+    <th>Пояснение</th>
+    </thead>
+    <div th:each="appointment : ${appointments}">
+        <tr>
+            <td th:text="${appointment.result.getId()}"></td>
+            <td th:text="${appointment.getDate()}"></td>
+            <td th:text="${appointment.getTime()}"></td>
+            <td><span th:text="${appointment.getDoctor().getFirstName()}"></span>&nbsp<span th:text="${appointment.getDoctor().getLastName()}"></span></td>
+            <td th:text="${appointment.getDoctor().getSpec()}"></td>
+            <td th:text="${appointment.result.diagnosis}"></td>
+            <td th:text="${appointment.result.therapy}"></td>
+            <td th:text="${appointment.result.description}"></td>
+        </tr>
+    </div>
+</table>
+</body>
+</html>
