@@ -1,11 +1,16 @@
 package course.polyclinic.services;
 
 import course.polyclinic.components.Appointment;
+import course.polyclinic.components.FreeMeet;
+import course.polyclinic.enums.Status;
 import course.polyclinic.repo.AppointmentRepo;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +26,17 @@ public class AppointmentService {
     }
     public Appointment find(Long id){
         return appointmentRepo.findAppointmentById(id);
+    }
+    public void updateApp(LocalDate date) {
+        System.out.println("ol");
+        List<Appointment> appointments = appointmentRepo.findAll();
+        for (int i = 0; i < appointments.size(); i++) {
+            if (appointments.get(i).getDate().isBefore(date)) {
+                System.out.println("ok");
+                appointments.get(i).setStatus(Status.SKIPPING);
+                appointmentRepo.save(appointments.get(i));
+            }
+        }
     }
 
 }

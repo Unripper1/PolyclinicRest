@@ -10,7 +10,6 @@
         <button>авторизация</button>
     </form>
     <br>
-    <span th:text="${status}"></span>
     <div th:if="${status} == 'ROLE_USER'">
         <form  action="/customer/lk">
             <button>Личный кабинет</button>

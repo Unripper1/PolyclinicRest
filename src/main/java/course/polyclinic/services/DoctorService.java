@@ -11,6 +11,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,6 +47,29 @@ public class DoctorService {
     public void delMeet(FreeTime time){
         timeRepo.delete(time);
     }
-
+    public void updateSchedule(LocalTime time, LocalDate date) {
+        List<FreeMeet> meets = new ArrayList<>();
+//        for(FreeMeet meet:freeMeetRepo.findAll())
+//            if(meet.getDate().isBefore(date) || meet.getDate().isEqual(date))
+//                meets.add(meet);
+//        for(Doctor doctor: doctorRepo.findAll()) {
+//            boolean b = false;
+//            for (FreeMeet meet : doctor.getFreeMeets())
+//                if (meet.getDate().isEqual(date.plusDays(7)))
+//                    b=true;
+//            if(b==true)
+//
+//        }
+        for (int i = 0; i < meets.size(); i++) {
+            for (int j = 0; j < meets.get(i).getFreeTimes().size(); j++) {
+                if (meets.get(i).getFreeTimes().get(j).getTime().isBefore(time) || meets.get(i).getDate().isBefore(date))
+                    timeRepo.delete(meets.get(i).getFreeTimes().get(j));
+            }
+            if(meets.get(i).getFreeTimes().size()==0){
+                freeMeetRepo.delete(meets.get(i));
+                System.out.println("ok");
+            }
+        }
+    }
 
 }

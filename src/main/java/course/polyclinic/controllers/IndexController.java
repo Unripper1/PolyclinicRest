@@ -54,9 +54,7 @@ public class IndexController {
 //        doctorService.add(doctor);
         UserDetails user=userService.loadUserByUsername(userService.getCurrentUsername());
         Role role=(Role)user.getAuthorities().iterator().next();
-        if(role.getName().equals("ROLE_USER"))
-        System.out.println(role.getName());
-        model.addAttribute("status",role.getName().toString());
+        model.addAttribute("status",role.getName());
         return "index";
     }
     @GetMapping("/registration")

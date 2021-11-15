@@ -6,9 +6,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+@Transactional
 @Accessors(chain = true)
 @Entity
 @RequiredArgsConstructor
