@@ -27,7 +27,7 @@ public class IndexController {
     private final UserService userService;
     private final DoctorService doctorService;
     @GetMapping("/")
-    public String home(){
+    public String home(Model model){
 //        LocalDate date= LocalDate.now();
 //        Doctor doctor=new Doctor().setBirthDate(LocalDate.of(2000,11,2)).
 //                setFirstName("Test").setLastName("Best").setGender(Gender.MALE).setNumber("8900000000").setCabinet(300).setSpec(Specialization.SURGEON);
@@ -53,7 +53,10 @@ public class IndexController {
 //        userService.saveUser(user,"ROLE_DOCTOR");
 //        doctorService.add(doctor);
         UserDetails user=userService.loadUserByUsername(userService.getCurrentUsername());
-        System.out.println(user.getAuthorities());
+        Role role=(Role)user.getAuthorities().iterator().next();
+        if(role.getName().equals("ROLE_USER"))
+        System.out.println(role.getName());
+        model.addAttribute("status",role.getName().toString());
         return "index";
     }
     @GetMapping("/registration")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Поликлиника</title>
@@ -10,9 +10,17 @@
         <button>авторизация</button>
     </form>
     <br>
-    <form action="/customer/lk" target="_blank">
-        <button>Личный кабинет</button>
-    </form>
+    <span th:text="${status}"></span>
+    <div th:if="${status} == 'ROLE_USER'">
+        <form  action="/customer/lk">
+            <button>Личный кабинет</button>
+        </form>
+    </div>
+    <div th:if="${status} == 'ROLE_DOCTOR'">
+        <form action="/doctor/lk">
+            <button>Личный кабинет</button>
+        </form>
+    </div>
     <br>
     <form action="/registration" target="_blank">
         <button>Регистрация</button>

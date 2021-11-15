@@ -37,6 +37,8 @@
             <td th:text="${appointment.getTime()}"></td>
             <td th:text="${appointment.getDoctor().getCabinet()}"></td>
             <td><span th:text="${appointment.getCustomer().getFirstName()}"></span>&nbsp<span th:text="${appointment.getCustomer().getLastName()}"></span></td>
+            <td><a type="submit" th:href="@{/doctor/app/{id}(id=${appointment.getId()})}"><button>Просмотр</button></a></td>
+
         </tr>
     </div>
 </table>

@@ -19,5 +19,8 @@ public class AppointmentService {
     public List<Appointment> getAppointments(){
         return appointmentRepo.findAll();
     }
+    public Appointment find(Long id){
+        return appointmentRepo.findAppointmentById(id);
+    }
 
 }

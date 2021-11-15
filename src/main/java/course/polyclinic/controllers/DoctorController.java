@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -25,5 +26,10 @@ public class DoctorController {
     public String lk(Model model){
         model.addAttribute("appointments",userService.loadUserByUsername(userService.getCurrentUsername()).getDoctor().getAppointments());
         return "lk_doc";
+    }
+    @GetMapping("/{id}")
+    public String app(@PathVariable("id") long id,Model model){
+        model.addAttribute("appointment", appointmentService.find(id));
+        return "app";
     }
 }
