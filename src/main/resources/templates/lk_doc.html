@@ -7,6 +7,8 @@
 <body>
 <h1>Личный кабинет</h1>
 <br>
+<h1><span th:text="${doctor.firstName}"></span>&nbsp<span th:text="${doctor.lastName}"></span></h1>
+<br>
 <form action="/logout">
     <button>Выйти</button>
 </form>

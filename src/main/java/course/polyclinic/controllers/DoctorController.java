@@ -31,6 +31,7 @@ public class DoctorController {
 //    @PreAuthorize("hasRole('ROLE_DOCTOR')")
     public String lk(Model model){
         model.addAttribute("appointments",userService.loadUserByUsername(userService.getCurrentUsername()).getDoctor().getAppointments());
+        model.addAttribute("doctor",userService.loadUserByUsername(userService.getCurrentUsername()).getDoctor());
         return "lk_doc";
     }
     @GetMapping("/app/{id}")

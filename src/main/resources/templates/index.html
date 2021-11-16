@@ -20,6 +20,11 @@
             <button>Личный кабинет</button>
         </form>
     </div>
+    <div th:if="${status} == 'ROLE_ADMIN'">
+        <form action="/admin/lk">
+            <button>Личный кабинет</button>
+        </form>
+    </div>
     <br>
     <form action="/registration" target="_blank">
         <button>Регистрация</button>

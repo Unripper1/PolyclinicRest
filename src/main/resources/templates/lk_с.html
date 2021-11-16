@@ -6,6 +6,9 @@
 </head>
 <body>
 <h1>Личный кабинет</h1>
+<br>
+<h1><span th:text="${customer.firstName}"></span>&nbsp<span th:text="${customer.lastName}"></span></h1>
+<br>
 <form action="/customer/order">
     <button>Записаться ко врачу</button>
 </form>

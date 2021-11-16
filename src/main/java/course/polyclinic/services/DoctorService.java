@@ -49,9 +49,9 @@ public class DoctorService {
     }
     public void updateSchedule(LocalTime time, LocalDate date) {
         List<FreeMeet> meets = new ArrayList<>();
-//        for(FreeMeet meet:freeMeetRepo.findAll())
-//            if(meet.getDate().isBefore(date) || meet.getDate().isEqual(date))
-//                meets.add(meet);
+        for(FreeMeet meet:freeMeetRepo.findAll())
+            if(meet.getDate().isBefore(date) || meet.getDate().isEqual(date))
+                meets.add(meet);
 //        for(Doctor doctor: doctorRepo.findAll()) {
 //            boolean b = false;
 //            for (FreeMeet meet : doctor.getFreeMeets())

@@ -28,11 +28,9 @@ public class AppointmentService {
         return appointmentRepo.findAppointmentById(id);
     }
     public void updateApp(LocalDate date) {
-        System.out.println("ol");
         List<Appointment> appointments = appointmentRepo.findAll();
         for (int i = 0; i < appointments.size(); i++) {
             if (appointments.get(i).getDate().isBefore(date)) {
-                System.out.println("ok");
                 appointments.get(i).setStatus(Status.SKIPPING);
                 appointmentRepo.save(appointments.get(i));
             }
