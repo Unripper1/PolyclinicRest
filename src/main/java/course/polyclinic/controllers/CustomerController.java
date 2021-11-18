@@ -23,21 +23,18 @@ import java.util.Collections;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/customer")
-//@PreAuthorize("hasAuthority('ROLE_USER')")
 public class CustomerController {
     private final DoctorService doctorService;
     private final CustomerService customerService;
     private final AppointmentService appointmentService;
     private final UserService userService;
 
-//    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/lk")
     public String lk(Model model){
         model.addAttribute("appointments",userService.loadUserByUsername(userService.getCurrentUsername()).getCustomer().getAppointments());
         model.addAttribute("customer",userService.loadUserByUsername(userService.getCurrentUsername()).getCustomer());
         return "lk_с";
     }
-//    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/order")
     public String order(Model model){
         model.addAttribute("doctors",doctorService.getAll());

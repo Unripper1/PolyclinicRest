@@ -43,4 +43,15 @@ public class Doctor implements Serializable {
     private User user;
     @OneToMany(mappedBy = "doctor")
     private List<FreeMeet> freeMeets ;
+    public String encodeSpec(){
+        switch (spec){
+            case SURGEON:return "Хирург";
+            case NEUROLOGIST:return "Нейролог";
+            case UROLOGIST:return "Уролог";
+            case OPHTHALMOLOGIST: return "Офтальмолог";
+            case OTOLARYNGOLOGIST: return "Отоларинголог";
+        }
+        return null;
+    }
+
 }

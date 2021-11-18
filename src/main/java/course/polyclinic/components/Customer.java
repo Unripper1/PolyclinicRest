@@ -34,8 +34,6 @@ public class Customer {
     private String number;
     @OneToMany(mappedBy = "customer")
     private List<Appointment> appointments;
-    @OneToMany(mappedBy = "customer")
-    private List<Direction> directions;
     @OneToOne(mappedBy = "customer")
     private User user;
 

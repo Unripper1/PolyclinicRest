@@ -20,7 +20,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 //@RequiredArgsConstructor
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userService;
@@ -37,12 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .disable()
                 .authorizeRequests()
+                .antMatchers("/registration").not().fullyAuthenticated()
+                .antMatchers("/", "/resources/**").permitAll()
                 .antMatchers("/customer/**").hasRole("USER")
                 .antMatchers("/doctor/**").hasRole("DOCTOR")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers(
-                        "/", "/registration/**", "/js/**", "/css/**", "/fonts/**", "/images/**", "/sass/**")
-                .permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
 //                .loginPage("/login")

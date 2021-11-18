@@ -24,6 +24,4 @@ public class Result {
     private String description;
     @OneToOne(mappedBy = "result")
     private Appointment appointment;
-    @OneToMany(mappedBy = "result")
-    private List<Direction> directions;
 }

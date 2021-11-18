@@ -19,7 +19,7 @@
     <div th:each="doctor : ${doctors}">
 
         <tr>
-            <td th:text="${doctor.getSpec()}"></td>
+            <td th:text="${doctor.encodeSpec()}"></td>
             <td> <span th:text="${doctor.getFirstName()}"></span>&nbsp<span th:text="${doctor.getLastName()}"></span></td>
 <!--            <td>-->
 <!--                <p>Выберите дату:-->

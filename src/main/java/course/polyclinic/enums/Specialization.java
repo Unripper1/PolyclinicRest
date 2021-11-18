@@ -5,12 +5,9 @@ public enum Specialization {
      SURGEON,
      NEUROLOGIST,
      OTOLARYNGOLOGIST,
-     CARDIOLOGIST,
      OPHTHALMOLOGIST,
-     GYNECOLOGIST,
-     THERAPIST,
-     ULTRASOUND,
-     MRI,
-     ANALYZES,
-     BLOOD
+//     ULTRASOUND,
+//     MRI,
+//     ANALYZES,
+//     BLOOD
 }

@@ -37,7 +37,7 @@
             <td th:text="${appointment.getTime()}"></td>
             <td th:text="${appointment.getDoctor().getCabinet()}"></td>
             <td><span th:text="${appointment.getDoctor().getFirstName()}"></span>&nbsp<span th:text="${appointment.getDoctor().getLastName()}"></span></td>
-            <td th:text="${appointment.getDoctor().getSpec()}"></td>
+            <td th:text="${appointment.getDoctor().encodeSpec()}"></td>
             <td><a type="submit" th:href="@{/customer/delapp/{id}(id=${appointment.getId()})}"><button>Отменить</button></a></td>
         </tr>
     </div>

@@ -6,9 +6,6 @@
 </head>
 <body>
     <h1>Поликлиника</h1><br>
-    <form action="/login" target="_blank">
-        <button>авторизация</button>
-    </form>
     <br>
     <div th:if="${status} == 'ROLE_USER'">
         <form  action="/customer/lk">
@@ -25,8 +22,13 @@
             <button>Личный кабинет</button>
         </form>
     </div>
+    <div th:if="${status} == 'no'">
+        <form  action="/login">
+            <button>Войти</button>
+        </form>
+    </div>
     <br>
-    <form action="/registration" target="_blank">
+    <form th:if="${status} == 'no'" action="/registration" target="_blank">
         <button>Регистрация</button>
     </form>
 

@@ -4,6 +4,7 @@ package course.polyclinic.services;
 import course.polyclinic.components.Doctor;
 import course.polyclinic.components.FreeMeet;
 import course.polyclinic.components.FreeTime;
+import course.polyclinic.enums.Specialization;
 import course.polyclinic.repo.DoctorRepo;
 import course.polyclinic.repo.FreeMeetRepo;
 import course.polyclinic.repo.TimeRepo;
@@ -67,8 +68,30 @@ public class DoctorService {
             }
             if(meets.get(i).getFreeTimes().size()==0){
                 freeMeetRepo.delete(meets.get(i));
+
             }
         }
     }
+    public void newSchedule(LocalDate date,Doctor doctor) {
+        List<FreeMeet> freeMeetList=new ArrayList<>();
+        for(int i=0;i<=10;i++){
+            FreeMeet freeMeet= new FreeMeet().setDate(LocalDate.now().plusDays(i+1));
+            List<FreeTime> freeTimeList=new ArrayList<>();
+            freeMeet.setDoctor(doctor);
+            addMeets(freeMeet);
+            for (int j=0;j<=10;j++){
+                FreeTime freeTime=new FreeTime();
+                freeTime.setFreeMeet(freeMeet);
+                freeTime.setTime(LocalTime.of(10+j,0));
+                freeTimeList.add(freeTime);
+                addMeetsTime(freeTime);
+            }
+            freeMeet.setFreeTimes(freeTimeList);
+            addMeets(freeMeet);
+        }
+        doctor.setFreeMeets(freeMeetList);
+        add(doctor);
+    }
+
 
 }
