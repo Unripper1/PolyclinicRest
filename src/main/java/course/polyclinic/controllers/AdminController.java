@@ -34,12 +34,14 @@ public class AdminController {
     @PostMapping("/regdoc")
     public String registration(DoctorDTO doctorDTO, Model model) {
         try {
+            User user=new User().setLogin(doctorDTO.getLogin()).setPassword(doctorDTO.getPassword());
             LocalDate date=LocalDate.of(doctorDTO.getYear(),doctorDTO.getMonth(),doctorDTO.getDay());
             Doctor doctor=new Doctor().setGender(doctorDTO.getGender())
                     .setFirstName(doctorDTO.getFirstName()).setLastName(doctorDTO.getLastName())
                     .setNumber(doctorDTO.getNumber())
                     .setCabinet(doctorDTO.getCabinet())
-                    .setBirthDate(date).setSpec(doctorDTO.getSpec());
+                    .setBirthDate(date).setSpec(doctorDTO.getSpec()).setUser(user);
+            userService.saveUser(user,"ROLE_DOCTOR");
             doctorService.add(doctor);
             List<FreeMeet> freeMeetList=new ArrayList<>();
         for(int i=0;i<=10;i++){
@@ -57,14 +59,10 @@ public class AdminController {
             freeMeet.setFreeTimes(freeTimeList);
             doctorService.addMeets(freeMeet);
         }
-            doctor.setFreeMeets(freeMeetList);
-            User user=new User().setLogin(doctorDTO.getLogin()).setDoctor(doctor).setPassword(doctorDTO.getPassword());
-            userService.saveUser(user,"ROLE_DOCTOR");
-            doctorService.add(doctor);
             return "redirect:/admin/lk";
-        } catch (Exception e) {
-            model.addAttribute("status","Ошибка");
-            return "regdoc";
-        }
+       } catch (Exception e) {
+           model.addAttribute("status","Ошибка");
+           return "regdoc";
+       }
     }
 }
