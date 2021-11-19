@@ -22,11 +22,9 @@ public class User implements UserDetails {
     private String password;
     @Column(name="login")
     private String login;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="customer_id",referencedColumnName = "id")
+    @OneToOne(mappedBy = "user")
     private Customer customer;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="doctor_id",referencedColumnName = "id")
+    @OneToOne(mappedBy = "user")
     private Doctor doctor;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;

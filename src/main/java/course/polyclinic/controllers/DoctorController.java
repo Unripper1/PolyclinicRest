@@ -43,10 +43,8 @@ public class DoctorController {
     @PostMapping("/app/{id}")
     public String appPost(@PathVariable("id") long id, ResultDTO resultDTO){
         Result result=new Result().setDiagnosis(resultDTO.getDiagnosis()).setTherapy(resultDTO.getTherapy()).setDescription(resultDTO.getDescription());
-        appointmentService.find(id).setResult(result);
-        resultRepo.save(result);
-        appointmentService.find(id).setStatus(Status.SUCCESSFUL);
-        appointmentService.save(appointmentService.find(id));
+        resultRepo.save(result.setAppointment(appointmentService.find(id)));
+        appointmentService.save(appointmentService.find(id).setStatus(Status.SUCCESSFUL));
         return "app";
     }
 }

@@ -39,7 +39,8 @@ public class Doctor implements Serializable {
     private Specialization spec;
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;
-    @OneToOne(mappedBy = "doctor")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id",referencedColumnName = "id")
     private User user;
     @OneToMany(mappedBy = "doctor")
     private List<FreeMeet> freeMeets ;

@@ -22,6 +22,7 @@ public class Result {
     private String therapy;
     @Column(name="description")
     private String description;
-    @OneToOne(mappedBy = "result")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="appointment_id",referencedColumnName = "id")
     private Appointment appointment;
 }

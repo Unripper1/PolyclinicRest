@@ -34,7 +34,8 @@ public class Customer {
     private String number;
     @OneToMany(mappedBy = "customer")
     private List<Appointment> appointments;
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id",referencedColumnName = "id")
     private User user;
 
 }

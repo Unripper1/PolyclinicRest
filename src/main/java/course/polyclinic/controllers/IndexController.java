@@ -53,12 +53,12 @@ public class IndexController {
     public String registrationP(@Valid CustomerDTO customerDTO, Model model) {
         try {
             LocalDate date=LocalDate.of(customerDTO.getYear(),customerDTO.getMonth(),customerDTO.getDay());
+            User user=new User().setLogin(customerDTO.getLogin()).setPassword(customerDTO.getPassword());
             Customer customer=new Customer().setGender(customerDTO.getGender())
                     .setFirstName(customerDTO.getFirstName()).setLastName(customerDTO.getLastName())
                     .setNumber(customerDTO.getNumber())
                     .setInsurance(customerDTO.getInsurance())
-                    .setBirthDate(date);
-            User user=new User().setLogin(customerDTO.getLogin()).setCustomer(customer).setPassword(customerDTO.getPassword());
+                    .setBirthDate(date).setUser(user);
             userService.saveUser(user,"ROLE_USER");
             customerService.saveCustomer(customer);
             return "redirect:/customer/lk";

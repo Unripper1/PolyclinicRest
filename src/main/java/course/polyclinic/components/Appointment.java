@@ -32,7 +32,6 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name="doctor_id", nullable = false)
     private Doctor doctor;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="result_id",referencedColumnName = "id")
+    @OneToOne(mappedBy = "appointment")
     private Result result;
 }

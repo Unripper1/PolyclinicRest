@@ -9,19 +9,19 @@
 <div id="login-form">
     <h1>Регистрация</h1>
         <form  method="post" action="">
-            <input type="text" name="firstName"  placeholder="Имя"><br><br>
-            <input type="text" name="lastName"  placeholder="Фамилия"><br><br>
-            <input type="text" name="login" placeholder="Email"><br><br>
-            <select name="gender">
+            Имя:<input type="text" name="firstName"  placeholder="Имя"><br><br>
+            Фамилия:<input type="text" name="lastName"  placeholder="Фамилия"><br><br>
+            Email:<input type="text" name="login" placeholder="Email"><br><br>
+            Пол:<select name="gender">
                 <option th:each="genderOpt : ${T(course.polyclinic.enums.Gender).values()}"
                         th:value="${genderOpt}" th:text="${genderOpt}"></option>
             </select><br><br>
-            <input type="number" name="day" placeholder="День рождения"><br><br>
-            <input type="number" name="month" placeholder="Месяц рождения"><br><br>
-            <input type="number" name="year" placeholder="Год рождения"><br><br>
-            <input type="text" name="number" placeholder="Номер телефона"><br><br>
-            <input type="text" name="insurance" placeholder="Номер страховки"><br><br>
-            <input type="password" name="password" placeholder="Пароль"><br><br>
+            День рождения:<input type="number" name="day" placeholder="День рождения"><br><br>
+            Месяц рождения:<input type="number" name="month" placeholder="Месяц рождения"><br><br>
+            Год рождения":<input type="number" name="year" placeholder="Год рождения"><br><br>
+            Номер телефона:<input type="text" name="number" placeholder="Номер телефона"><br><br>
+            Номер страховки:<input type="text" name="insurance" placeholder="Номер страховки"><br><br>
+            Пароль:<input type="password" name="password" placeholder="Пароль"><br><br>
             <input type="submit" value="Зарегистрироваться">
         </form>
         <span th:text="${status}"></span>

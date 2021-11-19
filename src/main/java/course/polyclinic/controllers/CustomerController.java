@@ -31,7 +31,8 @@ public class CustomerController {
 
     @GetMapping("/lk")
     public String lk(Model model){
-        model.addAttribute("appointments",userService.loadUserByUsername(userService.getCurrentUsername()).getCustomer().getAppointments());
+
+        model.addAttribute("appointments", userService.loadUserByUsername(userService.getCurrentUsername()).getCustomer().getAppointments());
         model.addAttribute("customer",userService.loadUserByUsername(userService.getCurrentUsername()).getCustomer());
         return "lk_с";
     }

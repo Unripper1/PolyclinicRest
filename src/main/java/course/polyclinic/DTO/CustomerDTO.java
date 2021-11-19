@@ -19,14 +19,8 @@ public class CustomerDTO {
     @NotEmpty
     private String lastName;
     private Gender gender;
-    @Min(1)
-    @Max(12)
     private Integer month;
-    @Min(1900)
-    @Max(2021)
     private Integer year;
-    @Min(1)
-    @Max(31)
     private Integer day;
     @NotEmpty
     private String insurance;
