@@ -1,13 +1,13 @@
 package course.polyclinic.components;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.time.LocalTime;
 @Transactional
 @Accessors(chain = true)
@@ -23,5 +23,6 @@ public class FreeTime {
     LocalTime time;
     @ManyToOne
     @JoinColumn(name="freeMeet_id", nullable = false)
+    @JsonIgnore
     private FreeMeet freeMeet;
 }

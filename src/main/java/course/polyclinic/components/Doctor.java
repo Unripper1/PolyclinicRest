@@ -1,5 +1,6 @@
 package course.polyclinic.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import course.polyclinic.enums.Gender;
 import course.polyclinic.enums.Specialization;
 import lombok.Data;
@@ -38,9 +39,11 @@ public class Doctor implements Serializable {
     @Enumerated(EnumType.STRING)
     private Specialization spec;
     @OneToMany(mappedBy = "doctor")
+    @JsonIgnore
     private List<Appointment> appointments;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id",referencedColumnName = "id")
+    @JsonIgnore
     private User user;
     @OneToMany(mappedBy = "doctor")
     private List<FreeMeet> freeMeets ;

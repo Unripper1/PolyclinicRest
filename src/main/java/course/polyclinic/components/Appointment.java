@@ -1,19 +1,18 @@
 package course.polyclinic.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import course.polyclinic.enums.Status;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 @Accessors(chain = true)
 @Entity
 @Data
 @Table(name = "appointments")
+@JsonIgnoreProperties
 public class Appointment {
     @Id
     @Column(name="id")

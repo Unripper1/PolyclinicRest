@@ -15,6 +15,16 @@ public class DoctorDTO {
     private Integer year;
     private Integer day;
     private String number;
-    private Specialization spec;
+    private String spec;
     private Integer cabinet;
+    public Specialization decodeSpec(){
+        switch (spec){
+            case "SURGEON":return Specialization.SURGEON;
+            case "NEUROLOGIST":return Specialization.NEUROLOGIST;
+            case "UROLOGIST":return Specialization.UROLOGIST;
+            case "OPHTHALMOLOGIST": return Specialization.OPHTHALMOLOGIST;
+            case "OTOLARYNGOLOGIST": return Specialization.OTOLARYNGOLOGIST;
+        }
+        return null;
+    }
 }

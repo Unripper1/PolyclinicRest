@@ -19,11 +19,16 @@ public class CustomerDTO {
     @NotEmpty
     private String lastName;
     private Gender gender;
+    @Min(value = 1)
+    @Max(value = 12)
     private Integer month;
+    @Min(value = 1900)
+    @Max(value = 2010)
     private Integer year;
+    @Min(value = 1)
+    @Max(value = 31)
     private Integer day;
-    @NotEmpty
-    private String insurance;
+    private String spec;
     @NotEmpty
     private String number;
 }

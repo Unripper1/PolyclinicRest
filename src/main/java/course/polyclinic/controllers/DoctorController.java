@@ -1,6 +1,7 @@
 package course.polyclinic.controllers;
 
 import course.polyclinic.DTO.ResultDTO;
+import course.polyclinic.components.Appointment;
 import course.polyclinic.components.Result;
 import course.polyclinic.enums.Status;
 import course.polyclinic.repo.ResultRepo;
@@ -10,16 +11,14 @@ import course.polyclinic.services.DoctorService;
 import course.polyclinic.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("/doctor")
+@RequestMapping("/api/doctor")
 //@PreAuthorize("hasAuthority('ROLE_DOCTOR')")
 public class DoctorController {
     private final DoctorService doctorService;
@@ -27,24 +26,29 @@ public class DoctorController {
     private final AppointmentService appointmentService;
     private final UserService userService;
     private final ResultRepo resultRepo;
-    @GetMapping("/lk")
-//    @PreAuthorize("hasRole('ROLE_DOCTOR')")
-    public String lk(Model model){
-        model.addAttribute("appointments",userService.loadUserByUsername(userService.getCurrentUsername()).getDoctor().getAppointments());
-        model.addAttribute("doctor",userService.loadUserByUsername(userService.getCurrentUsername()).getDoctor());
-        return "lk_doc";
+    @GetMapping("/appointments")
+    @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
+
+    public List<Appointment> getAppointments(){
+        return userService.loadUserByUsername(userService.getCurrentUsername()).getDoctor().getAppointments().stream().filter(appointment -> appointment.getStatus()==Status.WAITING).collect(Collectors.toList());
     }
-    @GetMapping("/app/{id}")
-    public String app(@PathVariable("id") long id,Model model){
-        model.addAttribute("appointments",appointmentService.find(id).getCustomer().getAppointments());
-//        model.addAttribute("appointment", appointmentService.find(id));
-        return "app";
+
+    @GetMapping("/appointment/{id}")
+    @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
+
+    public List<Appointment> app(@PathVariable("id") long id){
+        return appointmentService.find(id).getCustomer().getAppointments().stream().filter(appointment -> appointment.getStatus()==Status.SUCCESSFUL).collect(Collectors.toList());
     }
-    @PostMapping("/app/{id}")
-    public String appPost(@PathVariable("id") long id, ResultDTO resultDTO){
-        Result result=new Result().setDiagnosis(resultDTO.getDiagnosis()).setTherapy(resultDTO.getTherapy()).setDescription(resultDTO.getDescription());
-        resultRepo.save(result.setAppointment(appointmentService.find(id)));
-        appointmentService.save(appointmentService.find(id).setStatus(Status.SUCCESSFUL));
-        return "app";
-    }
+@PostMapping("/app/{id}")
+@PreAuthorize("hasAuthority('ROLE_DOCTOR')")
+public void appPost(@PathVariable("id") long id, @RequestBody ResultDTO resultDTO){
+        System.out.println(resultDTO.getDescription());
+        System.out.println(resultDTO.getDiagnosis());
+        System.out.println(resultDTO.getTherapy());
+
+    Result result=new Result().setDiagnosis(resultDTO.getDiagnosis()).setTherapy(resultDTO.getTherapy()).setDescription(resultDTO.getDescription());
+    resultRepo.save(result.setAppointment(appointmentService.find(id)));
+    appointmentService.save(appointmentService.find(id).setStatus(Status.SUCCESSFUL));
+}
+
 }

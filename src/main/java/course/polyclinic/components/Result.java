@@ -1,11 +1,10 @@
 package course.polyclinic.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -24,5 +23,6 @@ public class Result {
     private String description;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="appointment_id",referencedColumnName = "id")
+    @JsonIgnore
     private Appointment appointment;
 }

@@ -1,13 +1,12 @@
 package course.polyclinic.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import course.polyclinic.enums.Gender;
 import lombok.Data;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -28,14 +27,14 @@ public class Customer {
     private Gender gender;
     @Column(name="birthDate")
     private LocalDate birthDate;
-    @Column(name="insurance")
-    private String insurance="null";
     @Column(name="phone_number")
     private String number;
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<Appointment> appointments;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id",referencedColumnName = "id")
+    @JsonIgnore
     private User user;
 
 }

@@ -29,7 +29,6 @@ public class SchedulerService {
     @Scheduled(cron = "* * * 15 * *")
     public void updateSch() {
         LocalDate date = LocalDate.now();
-        System.out.println(1);
         for(Doctor doctor:doctorService.getAll()) {
             doctorService.newSchedule(date,doctor);
         }
