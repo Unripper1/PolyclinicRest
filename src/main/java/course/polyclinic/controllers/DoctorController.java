@@ -33,13 +33,13 @@ public class DoctorController {
         return userService.loadUserByUsername(userService.getCurrentUsername()).getDoctor().getAppointments().stream().filter(appointment -> appointment.getStatus()==Status.WAITING).collect(Collectors.toList());
     }
 
-    @GetMapping("/appointment/{id}")
+    @GetMapping("/appointments/{id}")
     @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
 
     public List<Appointment> app(@PathVariable("id") long id){
         return appointmentService.find(id).getCustomer().getAppointments().stream().filter(appointment -> appointment.getStatus()==Status.SUCCESSFUL).collect(Collectors.toList());
     }
-@PostMapping("/app/{id}")
+@PostMapping("/appointments/{id}")
 @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
 public void appPost(@PathVariable("id") long id, @RequestBody ResultDTO resultDTO){
         System.out.println(resultDTO.getDescription());
